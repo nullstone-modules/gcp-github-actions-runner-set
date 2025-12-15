@@ -20,8 +20,18 @@ resource "helm_release" "scale_set" {
       value = var.runs_on
     },
     {
-      name  = "template"
-      value = local.runner_template
+      name = "image"
+      value = {
+        repository = local.repository_url
+        pullPolicy = "IfNotPresent"
+        tag        = local.app_version
+      }
+    },
+    {
+      name = "containerMode",
+      value = yamlencode({
+        type = "kubernetes-novolume"
+      })
     }
   ]
 }
