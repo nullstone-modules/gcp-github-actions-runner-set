@@ -3,12 +3,12 @@ name: gcp-github-actions-runner-set
 friendly_name: GitHub Actions Runner Set
 description: Creates self-hosted runner set for GitHub Actions in a new Kubernetes namespace
 category: app
-subcategory: server
+subcategory: container
 provider_types:
     - gcp
-platform: github-actions
-subplatform: k8s
+platform: k8s
+subplatform: gke
 type: ""
 appCategories: []
 is_public: true
-tool_name: ""
+tool_name: opentofu
