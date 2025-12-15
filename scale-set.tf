@@ -18,6 +18,10 @@ resource "helm_release" "scale_set" {
     {
       name  = "runnerScaleSetName"
       value = var.runs_on
+    },
+    {
+      name  = "template"
+      value = local.runner_template
     }
   ]
 }

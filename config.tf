@@ -36,8 +36,6 @@ locals {
 
   runner_template = yamlencode({
     spec = {
-      serviceAccountName = kubernetes_service_account_v1.app.metadata[0].name
-
       containers = [
         {
           name    = "runner"
