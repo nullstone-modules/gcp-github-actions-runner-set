@@ -6,32 +6,17 @@ resource "helm_release" "scale_set" {
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set"
 
-  set = [
-    {
-      name  = "githubConfigUrl"
-      value = local.github_config_url
-    },
-    {
-      name  = "githubConfigSecret"
-      value = local.github_config_secret
-    },
-    {
-      name  = "runnerScaleSetName"
-      value = var.runs_on
-    },
-    {
-      name = "image"
-      value = {
+  values = [
+    yamlencode({
+      githubConfigUrl    = local.github_config_url
+      githubConfigSecret = local.github_config_secret
+      runnerScaleSetName = var.runs_on
+
+      image = {
         repository = local.repository_url
         pullPolicy = "IfNotPresent"
         tag        = local.app_version
       }
-    },
-    {
-      name = "containerMode",
-      value = yamlencode({
-        type = "kubernetes-novolume"
-      })
-    }
+    })
   ]
 }
