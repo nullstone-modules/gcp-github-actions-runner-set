@@ -12,6 +12,8 @@ resource "helm_release" "scale_set" {
       githubConfigSecret = local.github_config_secret
       runnerScaleSetName = var.runs_on
 
+      containerMode = local.container_mode
+
       template = {
         spec = {
           containers = [

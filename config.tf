@@ -1,4 +1,6 @@
 locals {
+  container_mode = var.enable_docker ? { type = "dind" } : null
+
   // This is based off the default template for containerMode.type=kubernetes
   // See https://github.com/actions/actions-runner-controller/blob/master/charts/gha-runner-scale-set/values.yaml#L366
   //
