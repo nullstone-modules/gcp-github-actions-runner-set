@@ -23,3 +23,13 @@ output "runs_on" {
   value       = var.runs_on
   description = "string ||| Use this value to execute a GitHub Actions workflow using these self-hosted runners. `runs-on: <runs_on>`"
 }
+
+output "service_namespace" {
+  value       = local.runners_namespace
+  description = "string ||| This is the Kubernetes namespace containing the runner set."
+}
+
+output "service_name" {
+  value       = ""
+  description = "string ||| This is left empty because there is no long-running service."
+}

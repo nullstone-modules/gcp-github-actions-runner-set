@@ -12,10 +12,16 @@ resource "helm_release" "scale_set" {
       githubConfigSecret = local.github_config_secret
       runnerScaleSetName = var.runs_on
 
-      image = {
-        repository = local.repository_url
-        pullPolicy = "IfNotPresent"
-        tag        = local.app_version
+      template = {
+        spec = {
+          containers = [
+            {
+              name    = "runner"
+              image   = "${local.repository_url}:${local.app_version}"
+              command = ["/home/runner/run.sh"]
+            }
+          ]
+        }
       }
     })
   ]
